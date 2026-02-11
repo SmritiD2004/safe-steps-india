@@ -1,12 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, BookOpen, Trophy, Gamepad2, Menu, X } from 'lucide-react';
+import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useGameStore } from '@/stores/gameStore';
 
 const navItems = [
   { path: '/', label: 'Home', icon: Shield },
   { path: '/play', label: 'Play', icon: Gamepad2 },
+  { path: '/puzzles', label: 'Puzzles', icon: Puzzle },
   { path: '/learn', label: 'Learn', icon: BookOpen },
   { path: '/progress', label: 'Progress', icon: Trophy },
 ];
