@@ -7,6 +7,8 @@ import AppShell from "./components/AppShell";
 import Index from "./pages/Index";
 import PlayPage from "./pages/PlayPage";
 import ScenarioPlayer from "./pages/ScenarioPlayer";
+import PuzzlePage from "./pages/PuzzlePage";
+import PuzzlePlayer from "./pages/PuzzlePlayer";
 import LearnPage from "./pages/LearnPage";
 import ProgressPage from "./pages/ProgressPage";
 import NotFound from "./pages/NotFound";
@@ -24,6 +26,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/play" element={<PlayPage />} />
             <Route path="/play/:scenarioId" element={<ScenarioPlayer />} />
+            <Route path="/puzzles" element={<PuzzlePage />} />
+            <Route path="/puzzles/:puzzleId" element={<PuzzlePlayer />} />
             <Route path="/learn" element={<LearnPage />} />
             <Route path="/progress" element={<ProgressPage />} />
             <Route path="*" element={<NotFound />} />
