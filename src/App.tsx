@@ -9,6 +9,8 @@ import PlayPage from "./pages/PlayPage";
 import ScenarioPlayer from "./pages/ScenarioPlayer";
 import PuzzlePage from "./pages/PuzzlePage";
 import PuzzlePlayer from "./pages/PuzzlePlayer";
+import RolePlayPage from "./pages/RolePlayPage";
+import RolePlayPlayer from "./pages/RolePlayPlayer";
 import LearnPage from "./pages/LearnPage";
 import ProgressPage from "./pages/ProgressPage";
 import NotFound from "./pages/NotFound";
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/play/:scenarioId" element={<ScenarioPlayer />} />
             <Route path="/puzzles" element={<PuzzlePage />} />
             <Route path="/puzzles/:puzzleId" element={<PuzzlePlayer />} />
+            <Route path="/roleplay" element={<RolePlayPage />} />
+            <Route path="/roleplay/:roleplayId" element={<RolePlayPlayer />} />
             <Route path="/learn" element={<LearnPage />} />
             <Route path="/progress" element={<ProgressPage />} />
             <Route path="*" element={<NotFound />} />
