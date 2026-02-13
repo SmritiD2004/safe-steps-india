@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useGameStore, BADGES } from '@/stores/gameStore';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { Trophy, Target, Brain, Award, RotateCcw } from 'lucide-react';
+import { Trophy, Target, Brain, Award, RotateCcw, MessageCircle } from 'lucide-react';
 import { scenarios } from '@/data/scenarios';
 
 const ProgressPage = () => {
@@ -127,6 +127,28 @@ const ProgressPage = () => {
           </div>
         </div>
       )}
+
+      {/* Get Recommendations */}
+      <div className="mb-8 rounded-xl border border-primary/20 bg-primary/5 p-5">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">🪔</span>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-foreground">Get Personalized Recommendations</p>
+            <p className="text-xs text-muted-foreground">Ask Diya for guidance based on your progress</p>
+          </div>
+          <Button
+            size="sm"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('open-safety-coach', {
+                detail: { message: 'Based on my current progress, what should I focus on next? Give me personalized recommendations.' }
+              }));
+            }}
+            className="gap-2 bg-gradient-hero text-primary-foreground"
+          >
+            <MessageCircle className="h-3.5 w-3.5" /> Ask Diya
+          </Button>
+        </div>
+      </div>
 
       {/* Reset */}
       <div className="rounded-xl border border-border bg-card p-5">
