@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useGameStore } from '@/stores/gameStore';
+import SafetyCoach from '@/components/SafetyCoach';
 
 const navItems = [
   { path: '/', label: 'Home', icon: Shield },
@@ -103,6 +104,7 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
         )}
       </header>
       <main>{children}</main>
+      <SafetyCoach />
     </div>
   );
 };

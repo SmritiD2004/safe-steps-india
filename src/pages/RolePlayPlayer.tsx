@@ -210,12 +210,23 @@ const RolePlayPlayer = () => {
                   </p>
                 </div>
 
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-wrap gap-3">
                   <Button onClick={handleFinish} className="bg-gradient-hero text-primary-foreground gap-2">
                     <Home className="h-4 w-4" /> Finish
                   </Button>
                   <Button variant="outline" onClick={resetGame} className="gap-2">
                     <RotateCcw className="h-4 w-4" /> Replay
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      window.dispatchEvent(new CustomEvent('open-safety-coach', {
+                        detail: { message: `I just finished the role-play "${roleplay.title}" with a score of ${score}/${roleplay.maxPoints} and EI score of ${Math.round(eiPercent)}%. Can you give me feedback on my emotional intelligence and suggest how I can improve?` }
+                      }));
+                    }}
+                    className="gap-2 border-primary/30 text-primary hover:bg-primary/5"
+                  >
+                    <MessageCircle className="h-4 w-4" /> Talk to Diya
                   </Button>
                 </div>
               </div>

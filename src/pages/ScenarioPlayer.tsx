@@ -5,7 +5,7 @@ import { scenarios, type ScenarioNode, type ScenarioChoice } from '@/data/scenar
 import { useGameStore } from '@/stores/gameStore';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { AlertTriangle, Shield, ChevronRight, RotateCcw, Home, BookOpen } from 'lucide-react';
+import { AlertTriangle, Shield, ChevronRight, RotateCcw, Home, BookOpen, MessageCircle } from 'lucide-react';
 
 const ScenarioPlayer = () => {
   const { scenarioId } = useParams<{ scenarioId: string }>();
@@ -147,7 +147,7 @@ const ScenarioPlayer = () => {
                     Final Score: <span className="font-bold text-primary">{score}/{scenario.maxScore}</span>
                   </p>
                 </div>
-                <div className="mt-4 flex gap-3">
+                <div className="mt-4 flex flex-wrap gap-3">
                   <Button onClick={handleFinish} className="bg-gradient-hero text-primary-foreground gap-2">
                     <Home className="h-4 w-4" /> Finish
                   </Button>
@@ -162,6 +162,18 @@ const ScenarioPlayer = () => {
                     className="gap-2"
                   >
                     <RotateCcw className="h-4 w-4" /> Replay
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      // Dispatch a custom event to open the coach with context
+                      window.dispatchEvent(new CustomEvent('open-safety-coach', {
+                        detail: { message: `I just completed the scenario "${scenario.title}" with a score of ${score}/${scenario.maxScore}. Can you review my performance and give me feedback?` }
+                      }));
+                    }}
+                    className="gap-2 border-primary/30 text-primary hover:bg-primary/5"
+                  >
+                    <MessageCircle className="h-4 w-4" /> Talk to Diya
                   </Button>
                 </div>
               </div>
