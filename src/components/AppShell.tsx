@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X } from 'lucide-react';
+import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { useGameStore } from '@/stores/gameStore';
 import SafetyCoach from '@/components/SafetyCoach';
@@ -24,7 +24,7 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
       <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md">
         <div className="container mx-auto flex items-center justify-between px-4 py-3">
           <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-hero">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-hero shadow-sm">
               <Shield className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="font-display text-xl font-bold text-foreground">SafePath</span>
