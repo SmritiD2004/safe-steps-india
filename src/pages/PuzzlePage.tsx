@@ -2,19 +2,31 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { puzzles } from '@/data/puzzles';
 import { Puzzle, Target } from 'lucide-react';
+import puzzleHero from '@/assets/puzzle-hero.jpg';
 
 const PuzzlePage = () => {
   return (
     <div className="container mx-auto px-4 py-10">
-      <div className="mb-8">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-          <Puzzle className="h-4 w-4" />
-          Puzzle Mode
+      {/* Hero Banner */}
+      <div className="mb-8 flex flex-col md:flex-row items-center gap-8 rounded-2xl bg-gradient-to-br from-accent/5 via-primary/5 to-background p-6 md:p-8">
+        <div className="flex-1">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+            <Puzzle className="h-4 w-4" />
+            Puzzle Mode
+          </div>
+          <h1 className="font-display text-3xl font-bold text-foreground">Safety Puzzles</h1>
+          <p className="mt-2 text-muted-foreground">
+            Test your safety knowledge with drag-and-drop matching and red flag identification challenges.
+          </p>
         </div>
-        <h1 className="font-display text-3xl font-bold text-foreground">Safety Puzzles</h1>
-        <p className="mt-2 text-muted-foreground">
-          Test your safety knowledge with drag-and-drop matching and red flag identification challenges.
-        </p>
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          src={puzzleHero}
+          alt="Colorful puzzle pieces floating with sparkles"
+          className="w-48 md:w-56 rounded-2xl shadow-warm object-cover"
+        />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

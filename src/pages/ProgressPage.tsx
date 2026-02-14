@@ -4,6 +4,7 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Trophy, Target, Brain, Award, RotateCcw, MessageCircle } from 'lucide-react';
 import { scenarios } from '@/data/scenarios';
+import progressHero from '@/assets/progress-hero.jpg';
 
 const ProgressPage = () => {
   const {
@@ -17,7 +18,21 @@ const ProgressPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="mb-8 font-display text-3xl font-bold text-foreground">Your Progress</h1>
+      {/* Hero Banner */}
+      <div className="mb-8 flex flex-col md:flex-row items-center gap-8 rounded-2xl bg-gradient-to-br from-secondary/5 via-empowerment/5 to-background p-6 md:p-8">
+        <div className="flex-1">
+          <h1 className="font-display text-3xl font-bold text-foreground">Your Progress</h1>
+          <p className="mt-2 text-muted-foreground">Track your safety learning journey, earn badges, and build confidence.</p>
+        </div>
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          src={progressHero}
+          alt="Trophy with stars and progress chart"
+          className="w-48 md:w-56 rounded-2xl shadow-warm object-cover"
+        />
+      </div>
 
       {/* Player Card */}
       <div className="mb-8 rounded-2xl bg-gradient-hero p-6 text-primary-foreground shadow-glow">
