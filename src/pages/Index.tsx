@@ -1,30 +1,35 @@
 import { motion } from 'framer-motion';
-import { Shield, Gamepad2, BookOpen, Heart, ArrowRight } from 'lucide-react';
+import { Shield, Gamepad2, BookOpen, Heart, ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useGameStore } from '@/stores/gameStore';
 import { scenarios } from '@/data/scenarios';
 import { Button } from '@/components/ui/button';
+import heroImage from '@/assets/hero-women.jpg';
 
 const features = [
   {
     icon: Gamepad2,
     title: 'Interactive Scenarios',
     description: 'Navigate real-world Indian safety situations with branching storylines and meaningful choices.',
+    gradient: 'from-primary/10 to-secondary/10',
   },
   {
     icon: BookOpen,
     title: 'Know Your Rights',
     description: 'Learn about IPC sections, POSH Act, IT Act, and emergency helplines that protect you.',
+    gradient: 'from-secondary/10 to-empowerment/10',
   },
   {
     icon: Shield,
     title: 'Build Confidence',
     description: 'Practice safety decision-making in a safe space. Track your growth with our confidence meter.',
+    gradient: 'from-empowerment/10 to-primary/10',
   },
   {
     icon: Heart,
     title: 'Trauma-Informed',
     description: 'Designed with care — empowering language, no victim-blaming, and respectful narratives.',
+    gradient: 'from-primary/10 to-accent/10',
   },
 ];
 
@@ -34,48 +39,62 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-hero opacity-5" />
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mx-auto max-w-3xl text-center"
-          >
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-              <Shield className="h-4 w-4" />
-              Empowering Women Through Knowledge
-            </div>
-            <h1 className="font-display text-4xl font-bold leading-tight text-foreground md:text-6xl">
-              Your Safety,{' '}
-              <span className="text-gradient-hero">Your Power</span>
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-              SafePath is a trauma-informed serious game that helps you build safety awareness,
-              learn your legal rights, and practice confident decision-making through
-              real-world Indian scenarios.
-            </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link to="/play">
-                <Button size="lg" className="bg-gradient-hero text-primary-foreground shadow-glow gap-2 px-8 hover:opacity-90">
-                  {completedScenarios.length > 0 ? 'Continue Playing' : 'Start Your Journey'}
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/learn">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <BookOpen className="h-4 w-4" />
-                  Safety Knowledge
-                </Button>
-              </Link>
-            </div>
-            {playerName && (
-              <p className="mt-6 text-sm text-muted-foreground">
-                Welcome back, <span className="font-semibold text-foreground">{playerName}</span>! You've completed {completedScenarios.length} of {scenarios.length} scenarios.
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
+        <div className="container mx-auto px-4 relative">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                <Sparkles className="h-4 w-4" />
+                Empowering Women Through Knowledge
+              </div>
+              <h1 className="font-display text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
+                Your Safety,{' '}
+                <span className="text-gradient-hero">Your Power</span>
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground">
+                SafePath is a trauma-informed serious game that helps you build safety awareness,
+                learn your legal rights, and practice confident decision-making through
+                real-world Indian scenarios.
               </p>
-            )}
-          </motion.div>
+              <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row">
+                <Link to="/play">
+                  <Button size="lg" className="bg-gradient-hero text-primary-foreground shadow-glow gap-2 px-8 hover:opacity-90">
+                    {completedScenarios.length > 0 ? 'Continue Playing' : 'Start Your Journey'}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to="/learn">
+                  <Button size="lg" variant="outline" className="gap-2">
+                    <BookOpen className="h-4 w-4" />
+                    Safety Knowledge
+                  </Button>
+                </Link>
+              </div>
+              {playerName && (
+                <p className="mt-6 text-sm text-muted-foreground">
+                  Welcome back, <span className="font-semibold text-foreground">{playerName}</span>! You've completed {completedScenarios.length} of {scenarios.length} scenarios.
+                </p>
+              )}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative hidden md:block"
+            >
+              <div className="absolute inset-0 bg-gradient-hero rounded-3xl blur-3xl opacity-20 -rotate-3" />
+              <img
+                src={heroImage}
+                alt="Diverse Indian women standing together confidently"
+                className="relative rounded-3xl shadow-warm object-cover w-full"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -97,10 +116,10 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="rounded-xl border border-border bg-background p-6 shadow-soft transition-all hover:shadow-glow"
+                className={`rounded-2xl border border-border bg-gradient-to-br ${feature.gradient} p-6 shadow-soft transition-all hover:shadow-glow hover:-translate-y-1`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-hero">
+                  <feature.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <h3 className="font-display text-lg font-semibold text-foreground">{feature.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
@@ -126,7 +145,7 @@ const Index = () => {
               >
                 <Link
                   to={`/play/${scenario.id}`}
-                  className="block rounded-xl border border-border bg-card p-5 transition-all hover:shadow-glow hover:border-primary/30"
+                  className="block rounded-2xl border border-border bg-card p-5 transition-all hover:shadow-glow hover:border-primary/30 hover:-translate-y-1"
                 >
                   <div className="mb-3 text-3xl">{scenario.icon}</div>
                   <h3 className="font-display text-base font-semibold text-foreground">{scenario.title}</h3>
@@ -148,7 +167,7 @@ const Index = () => {
       </section>
 
       {/* Emergency */}
-      <section className="border-t border-border bg-card py-12">
+      <section className="border-t border-border bg-gradient-to-r from-primary/5 via-card to-secondary/5 py-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground">
             In immediate danger? Call{' '}

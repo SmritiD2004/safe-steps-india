@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ["Playfair Display", "serif"],
-        body: ["Plus Jakarta Sans", "sans-serif"],
+        body: ["Outfit", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
