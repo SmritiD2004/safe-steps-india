@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X, Sparkles, Moon, Sun } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useGameStore } from '@/stores/gameStore';
 import SafetyCoach from '@/components/SafetyCoach';
 
@@ -17,7 +17,13 @@ const navItems = [
 const AppShell = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'));
   const { level, totalPoints, avatarEmoji } = useGameStore();
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }, [dark]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,7 +62,14 @@ const AppShell = ({ children }: { children: React.ReactNode }) => {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setDark(!dark)}
+              className="rounded-lg p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <div className="hidden items-center gap-2 rounded-full bg-muted px-3 py-1.5 text-sm sm:flex">
               <span>{avatarEmoji}</span>
               <span className="font-medium text-foreground">Lv.{level}</span>
