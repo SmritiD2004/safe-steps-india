@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { knowledgeModules, safetyLaws, emergencyContacts } from '@/data/safetyKnowledge';
 import { useGameStore } from '@/stores/gameStore';
 import { Phone, BookOpen, Scale, ChevronDown, ChevronUp, Shield } from 'lucide-react';
+import learnHero from '@/assets/learn-hero.jpg';
 
 const LearnPage = () => {
   const { knowledgeModulesRead, markKnowledgeRead } = useGameStore();
@@ -20,8 +21,21 @@ const LearnPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Safety Knowledge</h1>
-      <p className="mb-10 text-muted-foreground">Empower yourself with knowledge about your rights, safety practices, and emergency resources.</p>
+      {/* Hero Banner */}
+      <div className="mb-10 flex flex-col md:flex-row items-center gap-8 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-background p-6 md:p-8">
+        <div className="flex-1">
+          <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Safety Knowledge</h1>
+          <p className="text-muted-foreground">Empower yourself with knowledge about your rights, safety practices, and emergency resources.</p>
+        </div>
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          src={learnHero}
+          alt="Woman reading about safety and legal rights"
+          className="w-48 md:w-56 rounded-2xl shadow-warm object-cover"
+        />
+      </div>
 
       {/* Emergency Contacts */}
       <section className="mb-12">
