@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X, Sparkles, Moon, Sun } from 'lucide-react';
+import { Shield, BookOpen, Trophy, Gamepad2, Puzzle, MessageCircle, Menu, X, Sparkles, Moon, Sun, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useGameStore } from '@/stores/gameStore';
 import SafetyCoach from '@/components/SafetyCoach';
@@ -10,6 +10,7 @@ const navItems = [
   { path: '/play', label: 'Play', icon: Gamepad2 },
   { path: '/puzzles', label: 'Puzzles', icon: Puzzle },
   { path: '/roleplay', label: 'Role-Play', icon: MessageCircle },
+  { path: '/self-defense', label: 'Defense', icon: Zap },
   { path: '/learn', label: 'Learn', icon: BookOpen },
   { path: '/progress', label: 'Progress', icon: Trophy },
 ];
