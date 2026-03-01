@@ -3,23 +3,35 @@ import { motion } from 'framer-motion';
 import { roleplays } from '@/data/roleplays';
 import { useGameStore } from '@/stores/gameStore';
 import { CheckCircle, MessageCircle } from 'lucide-react';
+import roleplayHero from '@/assets/roleplay-hero.jpg';
 
 const RolePlayPage = () => {
   const { completedScenarios } = useGameStore();
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <div className="mb-8">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-          <MessageCircle className="h-4 w-4" />
-          Role-Play Mode
+      {/* Hero Banner */}
+      <div className="mb-8 flex flex-col md:flex-row items-center gap-8 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-background p-6 md:p-8">
+        <div className="flex-1">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
+            <MessageCircle className="h-4 w-4" />
+            Role-Play Mode
+          </div>
+          <h1 className="font-display text-3xl font-bold text-foreground">
+            Practice Conversations
+          </h1>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            Navigate dialogue-driven scenarios that test your emotional intelligence — empathy, assertiveness, awareness, and composure.
+          </p>
         </div>
-        <h1 className="font-display text-3xl font-bold text-foreground">
-          Practice Conversations
-        </h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
-          Navigate dialogue-driven scenarios that test your emotional intelligence — empathy, assertiveness, awareness, and composure.
-        </p>
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          src={roleplayHero}
+          alt="Lotus flowers with speech bubbles representing dialogue"
+          className="w-48 md:w-56 rounded-2xl shadow-warm object-cover"
+        />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
