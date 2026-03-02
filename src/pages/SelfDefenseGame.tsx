@@ -10,6 +10,7 @@ import {
   ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Circle,
   Video, VideoOff, Zap, Star, Timer
 } from 'lucide-react';
+import { GameSounds, Haptics } from '@/lib/gameAudio';
 
 type GamePhase = 'setup' | 'countdown' | 'playing' | 'feedback' | 'results';
 type InputMode = 'tap' | 'camera';
@@ -142,9 +143,13 @@ const SelfDefenseGame = () => {
   useEffect(() => {
     if (phase !== 'countdown') return;
     if (countdown <= 0) {
+      GameSounds.countdownGo();
+      Haptics.heavy();
       setPhase('playing');
       return;
     }
+    GameSounds.countdown();
+    Haptics.light();
     const t = setTimeout(() => setCountdown((c) => c - 1), 1000);
     return () => clearTimeout(t);
   }, [phase, countdown]);
@@ -206,6 +211,8 @@ const SelfDefenseGame = () => {
     if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
     const reactionTime = Date.now() - moveStartTime;
     const newCombo = combo + 1;
+    if (newCombo >= 3) { GameSounds.combo(); } else { GameSounds.correct(); }
+    Haptics.success();
     setCombo(newCombo);
     setMaxCombo((m) => Math.max(m, newCombo));
     setResults((r) => [...r, { move, reacted: true, reactionTime, correct: true }]);
@@ -216,6 +223,8 @@ const SelfDefenseGame = () => {
 
   const handleMiss = (move: DefenseMove) => {
     if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
+    GameSounds.miss();
+    Haptics.error();
     setCombo(0);
     setResults((r) => [...r, { move, reacted: false, reactionTime: level?.timePerMove || 0, correct: false }]);
     setShowFeedback('miss');
@@ -226,6 +235,8 @@ const SelfDefenseGame = () => {
   // Tap handler
   const handleTap = (zone: string) => {
     if (phase !== 'playing' || !currentMove) return;
+    GameSounds.tap();
+    Haptics.light();
     if (zone === currentMove.tapZone) {
       handleCorrect(currentMove);
     }
@@ -243,6 +254,8 @@ const SelfDefenseGame = () => {
   // Submit results
   useEffect(() => {
     if (phase !== 'results' || !level) return;
+    if (passed) { GameSounds.levelComplete(); } else { GameSounds.levelFail(); }
+    Haptics.heavy();
     const pointsEarned = correctCount * 10 + maxCombo * 5;
     addPoints(pointsEarned);
     adjustConfidence(passed ? 5 : -2);
