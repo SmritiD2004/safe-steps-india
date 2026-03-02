@@ -32,6 +32,7 @@ const SelfDefenseGame = () => {
   const moves = level ? getMovesForLevel(level.id) : [];
 
   const [phase, setPhase] = useState<GamePhase>('setup');
+  const [shaking, setShaking] = useState(false);
   const [inputMode, setInputMode] = useState<InputMode>('tap');
   const [countdown, setCountdown] = useState(3);
   const [currentRound, setCurrentRound] = useState(0);
@@ -231,6 +232,8 @@ const SelfDefenseGame = () => {
     if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
     GameSounds.miss();
     Haptics.error();
+    setShaking(true);
+    setTimeout(() => setShaking(false), 400);
     setCombo(0);
     setResults((r) => [...r, { move, reacted: false, reactionTime: level?.timePerMove || 0, correct: false }]);
     setShowFeedback('miss');
@@ -294,7 +297,11 @@ const SelfDefenseGame = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-2xl">
+    <motion.div
+      className="container mx-auto px-4 py-6 max-w-2xl"
+      animate={shaking ? { x: [0, -6, 6, -4, 4, -2, 2, 0] } : { x: 0 }}
+      transition={shaking ? { duration: 0.4, ease: 'easeOut' } : {}}
+    >
       <ParticleLayer particles={particles} />
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
@@ -573,7 +580,7 @@ const SelfDefenseGame = () => {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
