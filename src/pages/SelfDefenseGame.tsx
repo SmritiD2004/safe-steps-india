@@ -11,6 +11,7 @@ import {
   Video, VideoOff, Zap, Star, Timer
 } from 'lucide-react';
 import { GameSounds, Haptics } from '@/lib/gameAudio';
+import { useParticleBurst, ParticleLayer } from '@/components/ParticleBurst';
 
 type GamePhase = 'setup' | 'countdown' | 'playing' | 'feedback' | 'results';
 type InputMode = 'tap' | 'camera';
@@ -50,6 +51,7 @@ const SelfDefenseGame = () => {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const moveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const animFrameRef = useRef<number>(0);
+  const { particles, burst } = useParticleBurst();
 
   // Camera setup
   const startCamera = useCallback(async () => {
@@ -213,6 +215,10 @@ const SelfDefenseGame = () => {
     const newCombo = combo + 1;
     if (newCombo >= 3) { GameSounds.combo(); } else { GameSounds.correct(); }
     Haptics.success();
+    // Particle burst at center of viewport
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    burst(cx, cy, newCombo >= 3 ? 20 : 12);
     setCombo(newCombo);
     setMaxCombo((m) => Math.max(m, newCombo));
     setResults((r) => [...r, { move, reacted: true, reactionTime, correct: true }]);
@@ -289,6 +295,7 @@ const SelfDefenseGame = () => {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-2xl">
+      <ParticleLayer particles={particles} />
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <button onClick={() => navigate('/self-defense')} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
